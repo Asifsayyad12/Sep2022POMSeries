@@ -22,6 +22,7 @@ public class LoginPage {
 	private By forgotPWLink= By.linkText("Forgotten Password");
 	
 	private By registerLink=By.linkText("Register");//Register
+	private By myDemoLink=By.linkText("Demo");
 
 	//2.page constructor:
 	
