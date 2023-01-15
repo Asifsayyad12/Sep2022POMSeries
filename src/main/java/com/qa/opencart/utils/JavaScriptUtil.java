@@ -1,0 +1,115 @@
+package com.qa.opencart.utils;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class JavaScriptUtil {
+	
+	private WebDriver driver;
+	
+	public JavaScriptUtil(WebDriver driver) {
+		this.driver=driver;
+	}
+	
+	
+	
+	public void flash(WebElement element) {
+		String bgcolor=element.getCssValue("backgroundColor");
+		for(int i=0;i<200;i++) {
+			changeColor("rgb(0,20,0)",element);   //1
+			changeColor(bgcolor, element);     //2
+		}
+	}
+
+	private void changeColor(String color, WebElement element) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].style.backgroundColor='"+color+"'",element);
+		
+		try {
+			Thread.sleep(20);
+		}catch(InterruptedException e) {
+			
+		}
+	}
+
+//Title
+	public String getTitleByJS() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		return js.executeScript(" return document.title;").toString();
+	}
+
+//Navigate Back
+	public void goBackByJS() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("history.go(-1)");
+	}
+//forward	
+	public void goForwardByJS() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("history.go(1)");
+	}
+//Refresh
+	public void refreshBrowserByJS() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("history.go(0)");
+	}
+	
+//Alert
+	public void generateAlert(String message) { 
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("alert('"+ message +"')");  //alert("Asif here")
+	}
+
+	public void generateConfirmPopUp(String message) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("confirm('"+ message +"')");
+	}
+	
+//InnerText
+	
+	public String getPageInnerTextByJS() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		return js.executeScript(" return document.documentElement.innerText;").toString();
+	}
+	
+//click
+	public void clickElementByJS(WebElement element) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();",element);
+	}
+	
+//sendKey
+	public void sendKeyUsingWithID(String id,String value) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("document.getElementByID('"+id+"').value'"+value+"'");	
+	}
+
+//Scrolling
+	
+	public void scrollPageDown() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");//window.scrollTo(0,document.body.scrollHeight);
+	}
+	
+	public void scrollPageDown(String height) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollTo(0,'"+height+"')");
+	}
+	
+	public void scrollPageUp() {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollTo(document.body.scrollHeight,0)");  //window.scrollTo(document.body.scrollHeight,0);
+	}
+	
+	public void scrollIntoView(WebElement element) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollToView(true);",element);
+	}
+	
+	//DrawBorder
+	public void drawBorder(WebElement element) {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].style.border='3px solid red'",element);
+}
+}
