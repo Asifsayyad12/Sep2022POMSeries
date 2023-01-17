@@ -1,6 +1,19 @@
 package com.qa.opencart.pages;
 
-public class CartPage {
-	String cart ="macbook";
+import org.openqa.selenium.By;
 
+public class CartPage {
+	
+	By cart =By.id("macbook");
+
+
+
+
+public CartPage(){
+	
+}
+
+public void addToCrat() {
+	
+}
 }
